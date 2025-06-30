@@ -63,74 +63,28 @@
 
     <!-- Main Container -->
     <main class="main-container">
-        <!-- Categories View -->
         <div class="categories-view" id="categoriesView">
             <div class="categories-grid">
-                <!-- Principal -->
-                <div class="card results-card glow" data-category="Principal">
-                    <div class="category-icon">👨‍🏫</div>
-                    <h3 class="category-title">Principal</h3>
+                {% set positions = results|groupby('position') %}
+                {% for position, candidates in positions %}
+                <div class="card results-card glow" data-category="{{ position }}">
+                    <div class="category-icon">🏆</div>
+                    <h3 class="category-title">{{ position }}</h3>
                     <div class="category-stats">
-                        <span class="vote-count" id="principalVotes">0 votes</span>
-                        <span class="winner" id="principalWinner">No votes yet</span>
+                        <ul style="list-style:none;padding:0;">
+                        {% for candidate in candidates %}
+                            <li><b>{{ candidate.name }}</b>: {{ candidate.vote_count }} votes</li>
+                        {% endfor %}
+                        </ul>
+                        <span class="winner">
+                            Winner: {% set max_votes = candidates|max(attribute='vote_count') %}
+                            {% set winners = candidates|selectattr('vote_count', 'equalto', max_votes)|map(attribute='name')|list %}
+                            {% if max_votes > 0 %}{{ winners|join(', ') }}{% else %}No votes yet{% endif %}
+                        </span>
                     </div>
                     <div class="card-hover-effect"></div>
                 </div>
-
-                <!-- Vice Principal -->
-                <div class="card results-card glow" data-category="Vice Principal">
-                    <div class="category-icon">👩‍🏫</div>
-                    <h3 class="category-title">Vice Principal</h3>
-                    <div class="category-stats">
-                        <span class="vote-count" id="vicePrincipalVotes">0 votes</span>
-                        <span class="winner" id="vicePrincipalWinner">No votes yet</span>
-                    </div>
-                    <div class="card-hover-effect"></div>
-                </div>
-
-                <!-- HOD of ECE -->
-                <div class="card results-card glow" data-category="HOD of ECE">
-                    <div class="category-icon">⚡</div>
-                    <h3 class="category-title">HOD of ECE</h3>
-                    <div class="category-stats">
-                        <span class="vote-count" id="hodECEVotes">0 votes</span>
-                        <span class="winner" id="hodECEWinner">No votes yet</span>
-                    </div>
-                    <div class="card-hover-effect"></div>
-                </div>
-
-                <!-- Dean - Academics -->
-                <div class="card results-card glow" data-category="Dean - Academics">
-                    <div class="category-icon">📚</div>
-                    <h3 class="category-title">Dean - Academics</h3>
-                    <div class="category-stats">
-                        <span class="vote-count" id="deanAcademicsVotes">0 votes</span>
-                        <span class="winner" id="deanAcademicsWinner">No votes yet</span>
-                    </div>
-                    <div class="card-hover-effect"></div>
-                </div>
-
-                <!-- Dean - Student Affairs -->
-                <div class="card results-card glow" data-category="Dean - Student Affairs">
-                    <div class="category-icon">🎭</div>
-                    <h3 class="category-title">Dean - Student Affairs</h3>
-                    <div class="category-stats">
-                        <span class="vote-count" id="deanStudentAffairsVotes">0 votes</span>
-                        <span class="winner" id="deanStudentAffairsWinner">No votes yet</span>
-                    </div>
-                    <div class="card-hover-effect"></div>
-                </div>
-
-                <!-- CR of EC-A -->
-                <div class="card results-card glow" data-category="CR of EC-A">
-                    <div class="category-icon">🚀</div>
-                    <h3 class="category-title">CR of EC-A</h3>
-                    <div class="category-stats">
-                        <span class="vote-count" id="crECAVotes">0 votes</span>
-                        <span class="winner" id="crECAWinner">No votes yet</span>
-                    </div>
-                    <div class="card-hover-effect"></div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 
