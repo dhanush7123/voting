@@ -39,7 +39,7 @@
     </header>
 
     <!-- Floating Back to Home Button -->
-    <a href="/home" class="back-to-home-btn" id="floatingBackBtn">
+    <a href="home.html" class="back-to-home-btn" id="floatingBackBtn">
         <span class="back-icon">←</span>
         <span class="back-text">Back to Home</span>
     </a>
@@ -48,7 +48,7 @@
     <section class="results-navigation">
         <div class="nav-content">
             <div style="margin-bottom: 2rem; text-align: left;">
-                <button class="btn btn-secondary back-btn glow" style="font-size: 1.1rem; padding: 0.7rem 1.5rem; margin-top: 1rem; margin-bottom: 1rem;" onclick="window.location.href='/home'">
+                <button class="btn btn-secondary back-btn glow" style="font-size: 1.1rem; padding: 0.7rem 1.5rem; margin-top: 1rem; margin-bottom: 1rem;" onclick="window.location.href='home.html'">
                     <span class="back-icon">←</span>
                     <span class="back-text">Back to Home</span>
                 </button>
@@ -63,28 +63,74 @@
 
     <!-- Main Container -->
     <main class="main-container">
+        <!-- Categories View -->
         <div class="categories-view" id="categoriesView">
             <div class="categories-grid">
-                {% set positions = results|groupby('position') %}
-                {% for position, candidates in positions %}
-                <div class="card results-card glow" data-category="{{ position }}">
-                    <div class="category-icon">🏆</div>
-                    <h3 class="category-title">{{ position }}</h3>
+                <!-- Principal -->
+                <div class="card results-card glow" data-category="Principal">
+                    <div class="category-icon">👨‍🏫</div>
+                    <h3 class="category-title">Principal</h3>
                     <div class="category-stats">
-                        <ul style="list-style:none;padding:0;">
-                        {% for candidate in candidates %}
-                            <li><b>{{ candidate.name }}</b>: {{ candidate.vote_count }} votes</li>
-                        {% endfor %}
-                        </ul>
-                        <span class="winner">
-                            Winner: {% set max_votes = candidates|max(attribute='vote_count') %}
-                            {% set winners = candidates|selectattr('vote_count', 'equalto', max_votes)|map(attribute='name')|list %}
-                            {% if max_votes > 0 %}{{ winners|join(', ') }}{% else %}No votes yet{% endif %}
-                        </span>
+                        <span class="vote-count" id="principalVotes">0 votes</span>
+                        <span class="winner" id="principalWinner">No votes yet</span>
                     </div>
                     <div class="card-hover-effect"></div>
                 </div>
-                {% endfor %}
+
+                <!-- Vice Principal -->
+                <div class="card results-card glow" data-category="Vice Principal">
+                    <div class="category-icon">👩‍🏫</div>
+                    <h3 class="category-title">Vice Principal</h3>
+                    <div class="category-stats">
+                        <span class="vote-count" id="vicePrincipalVotes">0 votes</span>
+                        <span class="winner" id="vicePrincipalWinner">No votes yet</span>
+                    </div>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <!-- HOD of ECE -->
+                <div class="card results-card glow" data-category="HOD of ECE">
+                    <div class="category-icon">⚡</div>
+                    <h3 class="category-title">HOD of ECE</h3>
+                    <div class="category-stats">
+                        <span class="vote-count" id="hodECEVotes">0 votes</span>
+                        <span class="winner" id="hodECEWinner">No votes yet</span>
+                    </div>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <!-- Dean - Academics -->
+                <div class="card results-card glow" data-category="Dean - Academics">
+                    <div class="category-icon">📚</div>
+                    <h3 class="category-title">Dean - Academics</h3>
+                    <div class="category-stats">
+                        <span class="vote-count" id="deanAcademicsVotes">0 votes</span>
+                        <span class="winner" id="deanAcademicsWinner">No votes yet</span>
+                    </div>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <!-- Dean - Student Affairs -->
+                <div class="card results-card glow" data-category="Dean - Student Affairs">
+                    <div class="category-icon">🎭</div>
+                    <h3 class="category-title">Dean - Student Affairs</h3>
+                    <div class="category-stats">
+                        <span class="vote-count" id="deanStudentAffairsVotes">0 votes</span>
+                        <span class="winner" id="deanStudentAffairsWinner">No votes yet</span>
+                    </div>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <!-- CR of EC-A -->
+                <div class="card results-card glow" data-category="CR of EC-A">
+                    <div class="category-icon">🚀</div>
+                    <h3 class="category-title">CR of EC-A</h3>
+                    <div class="category-stats">
+                        <span class="vote-count" id="crECAVotes">0 votes</span>
+                        <span class="winner" id="crECAWinner">No votes yet</span>
+                    </div>
+                    <div class="card-hover-effect"></div>
+                </div>
             </div>
         </div>
 
@@ -127,8 +173,8 @@
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <div class="footer-links">
-                    <a href="/home">Home</a>
-                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="home.html">Home</a>
+                    <a href="login.html">Login</a>
                     <a href="signup.html">Sign Up</a>
                 </div>
             </div>
@@ -590,7 +636,7 @@
             if (window.sharedAnimations) {
                 window.sharedAnimations.playClickSound();
             }
-            window.location.href = '/home';
+            window.location.href = 'home.html';
         }
     </script>
 
