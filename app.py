@@ -173,5 +173,5 @@ def initdb():
     return "Database initialized!"
 
 if __name__ == '__main__':
-    init_db()
+    # init_db()  # Do NOT run this on every start! Only use /initdb for setup.
     app.run(debug=True) 
