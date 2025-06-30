@@ -167,6 +167,11 @@ def update_profile():
         flash('Username cannot be empty.', 'error')
     return redirect(url_for('home'))
 
+@app.route('/initdb')
+def initdb():
+    init_db()
+    return "Database initialized!"
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True) 
