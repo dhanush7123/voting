@@ -1,0 +1,12 @@
+Principal|C1|Dr. Suresh Kumar
+Principal|C2|Dr. Radha Sharma
+Vice Principal|C1|Prof. Prakash Singh
+Vice Principal|C2|Prof. Asha Patel
+HOD of ECE|C1|Dr. Kiran Reddy
+HOD of ECE|C2|Dr. Vinay Kumar
+Dean - Academics|C1|Dr. Meera Iyer
+Dean - Academics|C2|Prof. Rajesh Gupta
+Dean - Student Affairs|C1|Dr. Priya Sharma
+Dean - Student Affairs|C2|Prof. Amit Kumar
+CR - ECE-A Section|C1|Rahul Singh
+CR - ECE-A Section|C2|Priya Patel 
