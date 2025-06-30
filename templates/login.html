@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/shared-animations.css?v=2">
+    <link rel="stylesheet" href="../static/css/login-space.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="space-theme">
+    <!-- Space Background with Stars -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Flying Spaceships -->
+    <div class="spaceships">
+        <div class="spaceship spaceship-1">
+            <svg viewBox="0 0 100 50" class="spaceship-svg">
+                <path d="M10 25 L90 25 L80 15 L70 10 L60 5 L50 10 L40 5 L30 10 L20 15 Z" fill="url(#spaceshipGradient1)"/>
+                <circle cx="85" cy="25" r="3" fill="#00ffff"/>
+                <circle cx="15" cy="25" r="2" fill="#ff6b6b"/>
+                <defs>
+                    <linearGradient id="spaceshipGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#00f2fe;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div class="spaceship spaceship-2">
+            <svg viewBox="0 0 80 40" class="spaceship-svg">
+                <path d="M5 20 L75 20 L65 12 L55 8 L45 4 L35 8 L25 4 L15 8 L10 12 Z" fill="url(#spaceshipGradient2)"/>
+                <circle cx="70" cy="20" r="2" fill="#ff6b6b"/>
+                <circle cx="10" cy="20" r="1.5" fill="#00ffff"/>
+                <defs>
+                    <linearGradient id="spaceshipGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#f5576c;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div class="spaceship spaceship-3">
+            <svg viewBox="0 0 60 30" class="spaceship-svg">
+                <path d="M3 15 L57 15 L48 9 L39 6 L30 3 L21 6 L12 9 L6 9 Z" fill="url(#spaceshipGradient3)"/>
+                <circle cx="52" cy="15" r="1.5" fill="#00ffff"/>
+                <circle cx="8" cy="15" r="1" fill="#ff6b6b"/>
+                <defs>
+                    <linearGradient id="spaceshipGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Floating Asteroids -->
+    <div class="asteroids">
+        <div class="asteroid asteroid-1"></div>
+        <div class="asteroid asteroid-2"></div>
+        <div class="asteroid asteroid-3"></div>
+        <div class="asteroid asteroid-4"></div>
+    </div>
+
+    <!-- Enhanced Theme Toggle -->
+    <div class="theme-toggle space-toggle">
+        <button id="themeToggle" class="theme-btn space-btn" aria-label="Toggle theme">
+            <div class="toggle-inner">
+                <span class="light-icon">☀️</span>
+                <span class="dark-icon">🌙</span>
+            </div>
+            <div class="toggle-glow"></div>
+        </button>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container space-container">
+        <div class="login-card space-card">
+            <!-- Header with logo -->
+            <div class="login-header space-header">
+                <div class="logo-container space-logo">
+                    <div class="logo-glow"></div>
+                    <img src="../static/images/logo-rvce_0.png" alt="RV College of Engineering Logo" class="rv-logo space-logo-img">
+                </div>
+                <h1 class="login-title space-title">RV College of Engineering</h1>
+                <p class="login-subtitle space-subtitle">Smart Voting System - Space Portal</p>
+                <div class="title-glow"></div>
+            </div>
+
+            <!-- Login Form -->
+            {% if error %}
+                <div class="error-message" style="color: red; text-align: center; margin-bottom: 1em;">{{ error }}</div>
+            {% endif %}
+            <form class="login-form space-form" id="loginForm" method="post" action="{{ url_for('login') }}">
+                <div class="form-group space-form-group">
+                    <label for="identifier" class="form-label space-label">Username or Email</label>
+                    <div class="input-container space-input-container">
+                        <input 
+                            type="text" 
+                            id="identifier" 
+                            name="identifier" 
+                            class="form-input space-input" 
+                            placeholder="Enter your username or email"
+                            required
+                        >
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+
+                <div class="form-group space-form-group">
+                    <label for="password" class="form-label space-label">Password</label>
+                    <div class="input-container space-input-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input space-input" 
+                            placeholder="Enter your password"
+                            required
+                        >
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <svg class="eye-icon" viewBox="0 0 24 24">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                            <svg class="eye-off-icon" viewBox="0 0 24 24" style="display: none;">
+                                <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+                            </svg>
+                        </button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn space-btn-glow">
+                    <span class="btn-text">Login</span>
+                    <div class="btn-shimmer"></div>
+                    <div class="btn-glow"></div>
+                </button>
+            </form>
+
+            <!-- Additional Links -->
+            <div class="login-links space-links">
+                <a href="{{ url_for('register') }}" class="link space-link">Sign Up</a>
+                <span class="separator space-separator">•</span>
+                <a href="{{ url_for('forgot_password') }}" class="link space-link">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Audio Elements for Feedback -->
+    <audio id="clickSound" class="audio-feedback">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/shared-animations.js?v=2"></script>
+    
+    <script>
+        // Enhanced login functionality with space theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = loginForm.querySelector('.space-btn-glow');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = passwordToggle.querySelector('.eye-icon');
+            const eyeOffIcon = passwordToggle.querySelector('.eye-off-icon');
+
+            // Password visibility toggle
+            passwordToggle.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.style.display = 'none';
+                    eyeOffIcon.style.display = 'block';
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.style.display = 'block';
+                    eyeOffIcon.style.display = 'none';
+                }
+                
+                // Play sound
+                if (window.sharedAnimations) {
+                    window.sharedAnimations.playClickSound();
+                }
+            });
+
+            // Add input focus effects
+            document.querySelectorAll('.space-input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+            });
+
+            // Add floating animation to spaceships
+            const spaceships = document.querySelectorAll('.spaceship');
+            spaceships.forEach((ship, index) => {
+                ship.style.animationDelay = `${index * 2}s`;
+            });
+
+            if (window.sharedAnimations && window.sharedAnimations.shootingStars) {
+                window.sharedAnimations.shootingStars();
+            }
+        });
+    </script>
+
+    <style>
+        /* Space Theme Styles */
+        .space-theme {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+
+        /* Space Background */
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+        }
+
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .stars {
+            background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                              radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                              radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                              radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                              radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        .stars2 {
+            background-image: radial-gradient(1px 1px at 50px 20px, #fff, transparent),
+                              radial-gradient(1px 1px at 100px 60px, rgba(255,255,255,0.8), transparent),
+                              radial-gradient(1px 1px at 150px 40px, #ddd, transparent),
+                              radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.6), transparent);
+            background-repeat: repeat;
+            background-size: 300px 150px;
+            animation: twinkle 6s ease-in-out infinite;
+        }
+
+        .stars3 {
+            background-image: radial-gradient(1px 1px at 80px 50px, #fff, transparent),
+                              radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,0.8), transparent),
+                              radial-gradient(1px 1px at 180px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 400px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+
+        .nebula {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%),
+                        radial-gradient(ellipse at 30% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            animation: nebulaFloat 20s ease-in-out infinite;
+        }
+
+        /* Flying Spaceships */
+        .spaceships {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .spaceship {
+            position: absolute;
+            opacity: 0.8;
+            animation: flyAcrossScreen 15s linear infinite;
+        }
+
+        .spaceship-1 {
+            top: 15%;
+            animation-delay: 0s;
+        }
+
+        .spaceship-2 {
+            top: 45%;
+            animation-delay: 5s;
+        }
+
+        .spaceship-3 {
+            top: 75%;
+            animation-delay: 10s;
+        }
+
+        .spaceship-svg {
+            width: 100px;
+            height: 50px;
+            filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.5));
+        }
+
+        /* Floating Asteroids */
+        .asteroids {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .asteroid {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #8b4513, #654321);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: asteroidFloat 25s linear infinite;
+        }
+
+        .asteroid-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .asteroid-2 {
+            top: 60%;
+            left: 80%;
+            animation-delay: 8s;
+        }
+
+        .asteroid-3 {
+            top: 80%;
+            left: 20%;
+            animation-delay: 15s;
+        }
+
+        .asteroid-4 {
+            top: 30%;
+            left: 70%;
+            animation-delay: 22s;
+        }
+
+        /* Enhanced Theme Toggle */
+        .space-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .space-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .toggle-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: togglePulse 2s ease-in-out infinite;
+        }
+
+        .space-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
+        }
+
+        /* Login Container */
+        .space-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .space-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloat 2s ease-out;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .space-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .space-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Space Header */
+        .space-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .space-logo {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        .space-logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .space-logo-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(79, 172, 254, 0.8);
+        }
+
+        .space-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .title-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(79, 172, 254, 0.2) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: titleGlow 4s ease-in-out infinite;
+        }
+
+        .space-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Space Form */
+        .space-form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .space-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .space-input-container {
+            position: relative;
+        }
+
+        .space-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .space-input:focus {
+            outline: none;
+            border-color: rgba(79, 172, 254, 0.5);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .space-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .space-input:focus + .input-glow {
+            opacity: 1;
+        }
+
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .password-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .eye-icon, .eye-off-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Space Button */
+        .space-btn-glow {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+            text-decoration: none;
+            width: 100%;
+            margin-top: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .space-btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+        }
+
+        .space-btn-glow:hover .btn-glow {
+            opacity: 1;
+        }
+
+        /* Space Links */
+        .space-links {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .space-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .space-link:hover {
+            color: rgba(79, 172, 254, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .space-separator {
+            color: rgba(255, 255, 255, 0.4);
+            margin: 0 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes nebulaFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10px, -10px) scale(1.05); }
+        }
+
+        @keyframes flyAcrossScreen {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 100px)) rotate(360deg); }
+        }
+
+        @keyframes asteroidFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        @keyframes togglePulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes cardFloat {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .space-container {
+                padding: 1rem;
+            }
+            
+            .space-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .space-title {
+                font-size: 2rem;
+            }
+            
+            .spaceship-svg {
+                width: 60px;
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .space-title {
+                font-size: 1.5rem;
+            }
+            
+            .space-subtitle {
+                font-size: 1rem;
+            }
+            
+            .space-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</body>
+</html> 

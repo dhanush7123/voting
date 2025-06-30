@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Voting System - RV College of Engineering</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/profile-panel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body class="dark-mode">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Animated Background Shapes -->
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Profile Icon -->
+    <div class="profile-icon-container">
+        <button id="profileIcon" class="profile-icon glow" aria-label="Open Profile">
+            <div class="profile-avatar" id="profileAvatar">
+                <span class="profile-initial" id="profileInitial">{{ username[0]|upper if username else 'U' }}</span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </div>
+
+    <!-- Profile Panel -->
+    <div id="profilePanel" class="profile-panel">
+        <div class="profile-panel-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flash-messages">
+                  {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+            <!-- Panel Header -->
+            <div class="panel-header">
+                <h3 class="panel-title">Profile</h3>
+                <button class="panel-close" id="closeProfilePanel" aria-label="Close Profile">
+                    <span>×</span>
+                </button>
+            </div>
+
+            <!-- Avatar Section -->
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar-display" id="avatarDisplay">
+                        <img id="avatarImage" src="" alt="Profile Avatar" style="display: none;">
+                        <span class="avatar-initial" id="avatarInitial">{{ username[0]|upper if username else 'U' }}</span>
+                    </div>
+                    <div class="avatar-overlay">
+                        <button class="upload-btn" id="uploadBtn">
+                            <span class="upload-icon">📸</span>
+                            <span class="upload-text">Upload Image</span>
+                        </button>
+                    </div>
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;">
+            </div>
+
+            <!-- User Info Section -->
+            <form class="user-info-section" method="POST" action="/update_profile">
+                <h4 class="section-title">User Information</h4>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="profile-input" value="{{ full_name or '' }}" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="profileUsername" name="profileUsername" class="profile-input" value="{{ username or '' }}" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="usn">USN (Optional)</label>
+                    <input type="text" id="usn" name="usn" class="profile-input" placeholder="Enter your USN" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth (Optional)</label>
+                    <input type="date" id="dob" name="dob" class="profile-input" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender (Optional)</label>
+                    <select id="gender" name="gender" class="profile-input" autocomplete="off">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+                <button class="save-btn glow" id="saveProfileBtn" type="submit">
+                    <span class="btn-icon">💾</span>
+                    <span class="btn-text">Save Changes</span>
+                </button>
+            </form>
+
+            <!-- Logout Section -->
+            <div class="logout-section">
+                <form method="GET" action="/logout">
+                    <button class="logout-btn glow" id="logoutBtn" type="submit">
+                        <span class="btn-icon">🚪</span>
+                        <span class="btn-text">Logout</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Panel Overlay -->
+    <div id="profileOverlay" class="profile-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="../static/images/logo-rvce_0.png" alt="RV College of Engineering Logo" class="rv-logo glow">
+            </div>
+            <h1 class="main-title">RV College of Engineering</h1>
+            <p class="subtitle">Smart Voting Portal</p>
+            <h2 class="welcome-username-gradient" id="welcomeUsername">Welcome, <span id="displayUsername">{{ username if username else 'User' }}</span>! 👋</h2>
+            <div class="hero-buttons">
+                <button class="hero-btn primary-btn" onclick="scrollToCategories()">
+                    <span class="btn-icon">🗳️</span>
+                    <span class="btn-text">Start Voting</span>
+                </button>
+                <button class="hero-btn secondary-btn" onclick="window.location.href='/results'">
+                    <span class="btn-icon">📊</span>
+                    <span class="btn-text">View Results</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="welcome-content">
+            <h2 class="welcome-text" id="welcomeText">Welcome to the Future of Voting</h2>
+            <p class="welcome-subtitle">Experience secure, transparent, and interactive voting with cutting-edge technology</p>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categoriesSection">
+            <!-- Principal -->
+            <div class="category-card glow" data-category="Principal">
+                <div class="category-icon">👨‍🏫</div>
+                <h3 class="category-title">Principal</h3>
+                <p class="category-description">Vote for the Principal of RV College of Engineering</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Vice Principal -->
+            <div class="category-card glow" data-category="Vice Principal">
+                <div class="category-icon">👩‍🏫</div>
+                <h3 class="category-title">Vice Principal</h3>
+                <p class="category-description">Vote for the Vice Principal of RV College of Engineering</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- HOD of ECE -->
+            <div class="category-card glow" data-category="HOD of ECE">
+                <div class="category-icon">⚡</div>
+                <h3 class="category-title">HOD of ECE</h3>
+                <p class="category-description">Vote for the Head of Department - Electronics & Communication</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Dean - Academics -->
+            <div class="category-card glow" data-category="Dean - Academics">
+                <div class="category-icon">📚</div>
+                <h3 class="category-title">Dean - Academics</h3>
+                <p class="category-description">Vote for the Dean of Academic Affairs</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Dean - Student Affairs -->
+            <div class="category-card glow" data-category="Dean - Student Affairs">
+                <div class="category-icon">🎓</div>
+                <h3 class="category-title">Dean - Student Affairs</h3>
+                <p class="category-description">Vote for the Dean of Student Affairs</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- CR of EC-A -->
+            <div class="category-card glow" data-category="CR of EC-A">
+                <div class="category-icon">👨‍🎓</div>
+                <h3 class="category-title">CR of EC-A</h3>
+                <p class="category-description">Vote for the Class Representative of EC-A</p>
+                <div class="category-stats">
+                    <span class="vote-count">0 votes cast</span>
+                    <span class="category-status">Active</span>
+                </div>
+                <div class="card-hover-effect"></div>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-card glow">
+                    <div class="stat-icon">🗳️</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="totalVotes">0</h3>
+                        <p class="stat-label">Total Votes Cast</p>
+                    </div>
+                </div>
+                <div class="stat-card glow">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="activeCategories">6</h3>
+                        <p class="stat-label">Active Categories</p>
+                    </div>
+                </div>
+                <div class="stat-card glow">
+                    <div class="stat-icon">🔒</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="securityLevel">100%</h3>
+                        <p class="stat-label">Security Level</p>
+                    </div>
+                </div>
+                <div class="stat-card glow">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="systemStatus">Online</h3>
+                        <p class="stat-label">System Status</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blockchain Status Section -->
+        <section class="blockchain-section">
+            <div class="blockchain-container">
+                <h2 class="section-title">Blockchain Security</h2>
+                <div class="blockchain-status">
+                    <div class="status-indicator" id="blockchainStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Verifying Blockchain...</span>
+                    </div>
+                    <div class="blockchain-info">
+                        <div class="info-item">
+                            <span class="info-label">Blocks:</span>
+                            <span class="info-value" id="blockCount">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Integrity:</span>
+                            <span class="info-value" id="integrityStatus">Checking...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RV College of Engineering</h4>
+                <p>Empowering democratic processes through technology</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: voting@rvce.edu.in</p>
+                <p>Phone: +91 80 6717 8021</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 RV College of Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Audio Elements for Feedback -->
+    <audio id="clickSound" class="audio-feedback">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="../static/js/shared-animations.js"></script>
+    <script src="../static/js/blockchain-voting.js"></script>
+    <script src="../static/js/real-time-analytics.js"></script>
+    <script src="../static/js/home-animations.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/app.js"></script>
+    <script>
+        // Initialize advanced features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize shared animations
+            if (window.sharedAnimations) {
+                window.sharedAnimations.initializeParticles();
+                window.sharedAnimations.initializeThemeToggle();
+            }
+            
+            // Initialize profile panel
+            if (window.profilePanel) {
+                window.profilePanel.initialize();
+            }
+            
+            // Initialize home animations
+            if (window.homeAnimations) {
+                window.homeAnimations.initialize();
+            }
+            
+            // Start real-time updates
+            startRealTimeUpdates();
+            
+            // Initialize vote count updates
+            updateVoteCounts();
+        });
+
+        // Start real-time updates
+        function startRealTimeUpdates() {
+            setInterval(() => {
+                updateStats();
+                updateBlockchainStatus();
+            }, 5000);
+        }
+
+        // Update statistics
+        function updateStats() {
+            if (window.realTimeAnalytics) {
+                const stats = window.realTimeAnalytics.getCurrentStats();
+                const totalVotesElement = document.getElementById('totalVotes');
+                if (totalVotesElement) {
+                    totalVotesElement.textContent = stats.totalVotes;
+                }
+            }
+        }
+
+        // Scroll to categories function
+        function scrollToCategories() {
+            const categoriesSection = document.getElementById('categoriesSection');
+            if (categoriesSection) {
+                categoriesSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add highlight effect
+                categoriesSection.classList.add('highlight');
+                setTimeout(() => {
+                    categoriesSection.classList.remove('highlight');
+                }, 2000);
+                
+                // Play audio feedback
+                const audio = document.getElementById('clickSound');
+                if (audio) {
+                    audio.play().catch(e => console.log('Audio play failed:', e));
+                }
+            }
+        }
+
+        // Enhanced category card click handler
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.category-card')) {
+                const card = e.target.closest('.category-card');
+                const category = card.dataset.category;
+                
+                // Add ripple effect
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple-effect';
+                card.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+                
+                // Navigate to voting page
+                setTimeout(() => {
+                    window.location.href = `/candidate?category=${encodeURIComponent(category)}`;
+                }, 300);
+            }
+        });
+
+        // Show notification
+        function showNotification(message, type) {
+            const container = document.getElementById('notificationContainer');
+            if (!container) {
+                const newContainer = document.createElement('div');
+                newContainer.id = 'notificationContainer';
+                newContainer.className = 'notification-container';
+                document.body.appendChild(newContainer);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                    <span class="notification-message">${message}</span>
+                </div>
+            `;
+            
+            document.getElementById('notificationContainer').appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize vote count updates
+        function updateVoteCounts() {
+            if (!window.votingSystem) return;
+            const stats = window.votingSystem.getVotingStatistics();
+            // Update total votes
+            const totalVotesElem = document.getElementById('totalVotes');
+            if (totalVotesElem) {
+                totalVotesElem.textContent = stats.totalVotes;
+            }
+            // Update per-category votes
+            document.querySelectorAll('.category-card').forEach(card => {
+                const category = card.getAttribute('data-category');
+                const voteCountElem = card.querySelector('.vote-count');
+                if (stats.categories[category] && voteCountElem) {
+                    voteCountElem.textContent = `${stats.categories[category].totalVotes} votes cast`;
+                }
+            });
+        }
+
+        // Minimal JS for profile panel open/close
+        window.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const profilePanel = document.getElementById('profilePanel');
+            const profileOverlay = document.getElementById('profileOverlay');
+            const closeProfilePanel = document.getElementById('closeProfilePanel');
+            function openPanel() {
+                profilePanel.classList.add('open');
+                profileOverlay.classList.add('open');
+            }
+            function closePanel() {
+                profilePanel.classList.remove('open');
+                profileOverlay.classList.remove('open');
+            }
+            if (profileIcon) profileIcon.addEventListener('click', openPanel);
+            if (closeProfilePanel) closeProfilePanel.addEventListener('click', closePanel);
+            if (profileOverlay) profileOverlay.addEventListener('click', closePanel);
+        });
+    </script>
+</body>
+</html> 

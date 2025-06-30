@@ -1,0 +1,264 @@
+/* Login Page Styles for RV College of Engineering Smart Voting System */
+
+/* Login Container */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-card {
+    background: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    max-width: 400px;
+    animation: slideInUp 0.6s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .login-card {
+    background: var(--card-bg-dark);
+    border: 1px solid var(--border-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Login Header */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.small-heart-logo {
+    margin-bottom: 20px;
+}
+
+.small-rv-logo-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.login-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-primary-light);
+}
+
+.dark-mode .login-title {
+    color: var(--text-primary-dark);
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary-light);
+    font-weight: 400;
+}
+
+.dark-mode .login-subtitle {
+    color: var(--text-secondary-dark);
+}
+
+/* Login Form */
+.login-form {
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent-light), #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dark-mode .login-btn {
+    background: linear-gradient(135deg, var(--accent-dark), #a78bfa);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.dark-mode .login-btn:hover {
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Button Text and Loader */
+.btn-text {
+    transition: opacity 0.3s ease;
+}
+
+.btn-loader {
+    transition: opacity 0.3s ease;
+}
+
+/* Login Links */
+.login-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.separator {
+    margin: 0 10px;
+    color: var(--text-secondary-light);
+}
+
+.dark-mode .separator {
+    color: var(--text-secondary-dark);
+}
+
+/* Password Toggle Button */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    opacity: 1;
+}
+
+/* Form Group Positioning */
+.form-group {
+    position: relative;
+}
+
+/* Focus Effects */
+.form-group.focused .form-label {
+    color: var(--accent-light);
+}
+
+.dark-mode .form-group.focused .form-label {
+    color: var(--accent-dark);
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    animation: slideDown 0.3s ease-out;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notification-icon {
+    font-size: 16px;
+}
+
+.notification-message {
+    font-weight: 500;
+}
+
+/* Login-specific Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Login-specific Responsive Design */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .login-title {
+        font-size: 1.3rem;
+    }
+    
+    .login-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .small-rv-logo-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 25px 15px;
+        margin: 15px;
+    }
+    
+    .login-title {
+        font-size: 1.2rem;
+    }
+    
+    .login-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .small-rv-logo-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .form-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .login-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+} 

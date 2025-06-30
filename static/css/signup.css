@@ -1,0 +1,308 @@
+/* Sign Up Page Styles for RV College of Engineering Smart Voting System */
+
+/* Sign Up Container */
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.signup-card {
+    background: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    max-width: 450px;
+    animation: slideInUp 0.6s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .signup-card {
+    background: var(--card-bg-dark);
+    border: 1px solid var(--border-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+.signup-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Sign Up Header */
+.signup-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.small-heart-logo {
+    margin-bottom: 20px;
+}
+
+.small-rv-logo-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.signup-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary-light);
+}
+
+.dark-mode .signup-title {
+    color: var(--text-primary-dark);
+}
+
+.signup-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary-light);
+    font-weight: 400;
+}
+
+.dark-mode .signup-subtitle {
+    color: var(--text-secondary-dark);
+}
+
+/* Sign Up Form */
+.signup-form {
+    margin-bottom: 20px;
+}
+
+/* Input Container with Floating Labels */
+.input-container {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.floating-label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--card-bg-light);
+    padding: 0 4px;
+    color: var(--text-secondary-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.dark-mode .floating-label {
+    background: var(--card-bg-dark);
+    color: var(--text-secondary-dark);
+}
+
+.form-input:focus + .floating-label,
+.form-input:not(:placeholder-shown) + .floating-label {
+    top: 0;
+    font-size: 0.8rem;
+    color: var(--accent-light);
+    font-weight: 500;
+}
+
+.dark-mode .form-input:focus + .floating-label,
+.dark-mode .form-input:not(:placeholder-shown) + .floating-label {
+    color: var(--accent-dark);
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.dark-mode .strength-bar {
+    background: var(--border-dark);
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-fill.weak {
+    width: 33.33%;
+    background: #ef4444;
+}
+
+.strength-fill.medium {
+    width: 66.66%;
+    background: #f59e0b;
+}
+
+.strength-fill.strong {
+    width: 100%;
+    background: #10b981;
+}
+
+.strength-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary-light);
+    font-weight: 500;
+}
+
+.dark-mode .strength-text {
+    color: var(--text-secondary-dark);
+}
+
+/* Error Messages */
+.error-message {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-top: 4px;
+    min-height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.error-message::before {
+    content: "⚠️";
+    margin-right: 4px;
+    font-size: 0.7rem;
+}
+
+/* Sign Up Button */
+.signup-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent-light), #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.dark-mode .signup-btn {
+    background: linear-gradient(135deg, var(--accent-dark), #a78bfa);
+}
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.dark-mode .signup-btn:hover {
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+.signup-btn:active {
+    transform: translateY(0);
+}
+
+.signup-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Button Text and Loader */
+.btn-text {
+    transition: opacity 0.3s ease;
+}
+
+.btn-loader {
+    transition: opacity 0.3s ease;
+}
+
+/* Sign Up Links */
+.signup-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-text {
+    color: var(--text-secondary-light);
+    font-size: 0.9rem;
+    margin-right: 8px;
+}
+
+.dark-mode .link-text {
+    color: var(--text-secondary-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signup-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .signup-title {
+        font-size: 1.5rem;
+    }
+    
+    .signup-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .small-rv-logo-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 25px 15px;
+        margin: 15px;
+    }
+    
+    .signup-title {
+        font-size: 1.3rem;
+    }
+    
+    .signup-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .small-rv-logo-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .form-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .signup-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .floating-label {
+        font-size: 0.9rem;
+    }
+    
+    .form-input:focus + .floating-label,
+    .form-input:not(:placeholder-shown) + .floating-label {
+        font-size: 0.7rem;
+    }
+} 

@@ -1,0 +1,13 @@
+MONKEY IMAGE PLACEHOLDERS
+
+Please replace these placeholder files with your actual monkey images:
+
+1. monkey-closed.png - Monkey with eyes closed (default state)
+2. monkey-open.png - Monkey with eyes open (when user types)
+
+Image Requirements:
+- Recommended size: 80x80 pixels for optimal display
+- Format: PNG with transparent background
+- Place both images in this img/ folder
+
+The animation will work automatically once you add the real images! 

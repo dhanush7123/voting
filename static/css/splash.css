@@ -1,0 +1,147 @@
+/* Splash Screen Styles for RV College of Engineering Smart Voting System */
+
+/* Splash Container */
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.logo-container {
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* RV Logo Animation */
+.heart-logo {
+    margin-bottom: 30px;
+    animation: zoomIn 2s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.heart-logo:hover {
+    transform: scale(1.1);
+}
+
+.rv-logo-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+/* College Name and Tagline */
+.college-name {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--accent-light), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dark-mode .college-name {
+    background: linear-gradient(135deg, var(--accent-dark), #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary-light);
+    font-weight: 400;
+}
+
+.dark-mode .tagline {
+    color: var(--text-secondary-dark);
+}
+
+/* Loading Animation */
+.loading-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.dark-mode .dot {
+    background: var(--accent-dark);
+}
+
+.dot:nth-child(1) { 
+    animation-delay: -0.32s; 
+}
+
+.dot:nth-child(2) { 
+    animation-delay: -0.16s; 
+}
+
+/* Splash-specific Animations */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Splash-specific Responsive Design */
+@media (max-width: 768px) {
+    .college-name {
+        font-size: 2rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .rv-logo-image {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .college-name {
+        font-size: 1.8rem;
+    }
+    
+    .rv-logo-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .loading-dots {
+        margin-top: 30px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+} 

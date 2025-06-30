@@ -1,0 +1,491 @@
+/* Space Theme Login Styles */
+.space-theme {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Space Background */
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+}
+
+.stars, .stars2, .stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.stars {
+    background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                      radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                      radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.stars2 {
+    background-image: radial-gradient(1px 1px at 50px 20px, #fff, transparent),
+                      radial-gradient(1px 1px at 100px 60px, rgba(255,255,255,0.8), transparent),
+                      radial-gradient(1px 1px at 150px 40px, #ddd, transparent),
+                      radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.6), transparent);
+    background-repeat: repeat;
+    background-size: 300px 150px;
+    animation: twinkle 6s ease-in-out infinite;
+}
+
+.stars3 {
+    background-image: radial-gradient(1px 1px at 80px 50px, #fff, transparent),
+                      radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,0.8), transparent),
+                      radial-gradient(1px 1px at 180px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 400px 200px;
+    animation: twinkle 8s ease-in-out infinite;
+}
+
+.nebula {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%),
+                radial-gradient(ellipse at 30% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+    animation: nebulaFloat 20s ease-in-out infinite;
+}
+
+/* Flying Spaceships */
+.spaceships {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.spaceship {
+    position: absolute;
+    opacity: 0.8;
+    animation: flyAcrossScreen 15s linear infinite;
+}
+
+.spaceship-1 {
+    top: 15%;
+    animation-delay: 0s;
+}
+
+.spaceship-2 {
+    top: 45%;
+    animation-delay: 5s;
+}
+
+.spaceship-3 {
+    top: 75%;
+    animation-delay: 10s;
+}
+
+.spaceship-svg {
+    width: 100px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.5));
+}
+
+/* Enhanced Theme Toggle */
+.space-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.space-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.toggle-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: togglePulse 2s ease-in-out infinite;
+}
+
+.space-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
+}
+
+/* Login Container */
+.space-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.space-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: cardFloat 2s ease-out;
+    max-width: 450px;
+    width: 100%;
+}
+
+.space-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.space-card:hover::before {
+    opacity: 1;
+}
+
+/* Space Header */
+.space-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.space-logo {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+.space-logo-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.space-logo-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(79, 172, 254, 0.8);
+}
+
+.space-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.title-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(79, 172, 254, 0.2) 0%, transparent 70%);
+    filter: blur(20px);
+    animation: titleGlow 4s ease-in-out infinite;
+}
+
+.space-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Space Form */
+.space-form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.space-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.space-input-container {
+    position: relative;
+}
+
+.space-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-family: 'Inter', sans-serif;
+}
+
+.space-input:focus {
+    outline: none;
+    border-color: rgba(79, 172, 254, 0.5);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+    transform: translateY(-2px);
+}
+
+.space-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.space-input:focus + .input-glow {
+    opacity: 1;
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.password-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.eye-icon, .eye-off-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Space Button */
+.space-btn-glow {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+    text-decoration: none;
+    width: 100%;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.space-btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+}
+
+.space-btn-glow:hover .btn-glow {
+    opacity: 1;
+}
+
+/* Space Links */
+.space-links {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.space-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 0 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.space-link:hover {
+    color: rgba(79, 172, 254, 0.9);
+    transform: translateY(-2px);
+}
+
+.space-separator {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 0.5rem;
+}
+
+/* Animations */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@keyframes nebulaFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-10px, -10px) scale(1.05); }
+}
+
+@keyframes flyAcrossScreen {
+    0% { transform: translateX(-100px) rotate(0deg); }
+    100% { transform: translateX(calc(100vw + 100px)) rotate(360deg); }
+}
+
+@keyframes togglePulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes cardFloat {
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes logoGlow {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes titleGlow {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .space-container {
+        padding: 1rem;
+    }
+    
+    .space-card {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .space-title {
+        font-size: 2rem;
+    }
+    
+    .spaceship-svg {
+        width: 60px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .space-title {
+        font-size: 1.5rem;
+    }
+    
+    .space-subtitle {
+        font-size: 1rem;
+    }
+    
+    .space-card {
+        padding: 1.5rem;
+    }
+} 

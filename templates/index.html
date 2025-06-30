@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV College of Engineering - Smart Voting System</title>
+    <link rel="stylesheet" href="../static/css/common.css">
+    <link rel="stylesheet" href="../static/css/splash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/shared-animations.css?v=2">
+</head>
+<body class="light-mode">
+    <!-- Dark/Light Mode Toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </div>
+
+    <!-- Main Splash Content -->
+    <div class="splash-container">
+        <div class="logo-container">
+            <div class="heart-logo">
+                <img src="../static/images/logo-rvce_0.png" alt="RV College of Engineering Logo" class="rv-logo-image">
+            </div>
+            <h1 class="college-name">RV College of Engineering</h1>
+            <p class="tagline">Smart Voting System</p>
+        </div>
+        
+        <!-- Loading animation -->
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/shared-animations.js?v=2"></script>
+    <canvas id="starfield" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
+    <script>
+      // Auto-redirect to /login after 3.5 seconds
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 3500);
+      // Simple starfield animation
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+      const stars = Array.from({length: 120}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.3,
+        s: Math.random() * 0.5 + 0.2
+      }));
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for (const star of stars) {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+          ctx.fillStyle = "#fff";
+          ctx.globalAlpha = Math.random() * 0.5 + 0.5;
+          ctx.fill();
+          star.y += star.s;
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.sharedAnimations && window.sharedAnimations.shootingStars) {
+          window.sharedAnimations.shootingStars();
+        }
+      });
+    </script>
+</body>
+</html> 
